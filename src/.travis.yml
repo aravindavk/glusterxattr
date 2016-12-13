@@ -1,0 +1,5 @@
+language: rust
+before_script:
+  rm -f testfile; touch testfile
+after_script:
+  rm -f testfile
