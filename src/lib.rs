@@ -52,7 +52,11 @@ fn set_uuid (path: &str, xattr_name: &str, gfid: &str) -> Result<(), Error> {
 /// use glusterxattr::get_gfid;
 ///
 /// fn main() {
-///     println!("{}", get_gfid("/bricks/b1/f1").unwrap());
+///     let res = get_gfid("/bricks/b1/f1");
+///     match res {
+///         Ok(v) => println!("GFID: {}", v),
+///         Err(e) => println!("Failed to get GFID: {}", e)
+///     }
 /// }
 /// ```
 pub fn get_gfid (path: &str) -> Result<String, Error> {
@@ -69,7 +73,11 @@ pub fn get_gfid (path: &str) -> Result<String, Error> {
 /// use glusterxattr::set_gfid;
 ///
 /// fn main() {
-///     set_gfid("/bricks/b1/f1", "0a118af0-3c20-4bdd-aded-694a17af6b5a").unwrap();
+///     let res = set_gfid("/bricks/b1/f1", "0a118af0-3c20-4bdd-aded-694a17af6b5a");
+///     match res {
+///         Ok(_) => println!("OK"),
+///         Err(e) => println!("Failed to set GFID: {}", e)
+///     }
 /// }
 /// ```
 pub fn set_gfid (path: &str, gfid: &str) -> Result<(), Error> {
@@ -86,7 +94,11 @@ pub fn set_gfid (path: &str, gfid: &str) -> Result<(), Error> {
 /// use glusterxattr::get_volume_id;
 ///
 /// fn main() {
-///     println!("{}", get_volume_id("/bricks/b1").unwrap());
+///     let res = get_volume_id("/bricks/b1");
+///     match res {
+///         Ok(v) => println!("Volume ID: {}", v),
+///         Err(e) => println!("Failed to get Volume ID: {}", e)
+///     }
 /// }
 /// ```
 pub fn get_volume_id (path: &str) -> Result<String, Error> {
@@ -103,7 +115,11 @@ pub fn get_volume_id (path: &str) -> Result<String, Error> {
 /// use glusterxattr::set_volume_id;
 ///
 /// fn main() {
-///     set_volume_id("/bricks/b1", "0a118af0-3c20-4bdd-aded-694a17af6b5a").unwrap();
+///     let res = set_volume_id("/bricks/b1", "0a118af0-3c20-4bdd-aded-694a17af6b5a");
+///     match res {
+///         Ok(_) => println!("OK"),
+///         Err(e) => println!("Failed to set volume ID: {}", e)
+///     }
 /// }
 /// ```
 pub fn set_volume_id (path: &str, volume_id: &str) -> Result<(), Error> {
@@ -120,7 +136,11 @@ pub fn set_volume_id (path: &str, volume_id: &str) -> Result<(), Error> {
 /// use glusterxattr::get_xtime;
 ///
 /// fn main() {
-///     println!("{:?}", get_xtime("/bricks/b1", "0a118af0-3c20-4bdd-aded-694a17af6b5a"));
+///     let res = get_xtime("/bricks/b1", "0a118af0-3c20-4bdd-aded-694a17af6b5a");
+///     match res {
+///         Ok(v) => println!("Xtime: {:?}", v),
+///         Err(e) => println!("Failed to get Xtime: {}", e)
+///     }
 /// }
 /// ```
 pub fn get_xtime (path: &str, volume_id: &str) -> Result<Xtime, Error> {
@@ -139,8 +159,12 @@ pub fn get_xtime (path: &str, volume_id: &str) -> Result<Xtime, Error> {
 /// use glusterxattr::set_xtime;
 ///
 /// fn main() {
-///     set_xtime("/bricks/b1", "0a118af0-3c20-4bdd-aded-694a17af6b5a",
-///               1481540557, 016683).unwrap();
+///     let res = set_xtime("/bricks/b1", "0a118af0-3c20-4bdd-aded-694a17af6b5a",
+///                         1481540557, 016683);
+///     match res {
+///         Ok(_) => println!("OK"),
+///         Err(e) => println!("Failed to set xtime: {}", e)
+///     }
 /// }
 /// ```
 pub fn set_xtime (path: &str, volume_id: &str, sec: u32, msec: u32) -> Result<(), Error> {
@@ -159,8 +183,12 @@ pub fn set_xtime (path: &str, volume_id: &str, sec: u32, msec: u32) -> Result<()
 /// use glusterxattr::get_stime;
 ///
 /// fn main() {
-///     println!("{:?}", get_stime("/bricks/b1", "0a118af0-3c20-4bdd-aded-694a17af6b5a",
-///                                "af95963b-bbe6-49cb-bf6d-db7260ea6f72"));
+///     let res = get_stime("/bricks/b1", "0a118af0-3c20-4bdd-aded-694a17af6b5a",
+///                         "af95963b-bbe6-49cb-bf6d-db7260ea6f72");
+///     match res {
+///         Ok(v) => println!("Stime: {:?}", v),
+///         Err(e) => println!("Failed to get Stime: {}", e)
+///     }
 /// }
 /// ```
 pub fn get_stime (path: &str, master_volume_id: &str, slave_volume_id: &str) -> Result<Xtime, Error> {
@@ -179,9 +207,13 @@ pub fn get_stime (path: &str, master_volume_id: &str, slave_volume_id: &str) -> 
 /// use glusterxattr::set_stime;
 ///
 /// fn main() {
-///     set_stime("/bricks/b1", "0a118af0-3c20-4bdd-aded-694a17af6b5a",
-///               "af95963b-bbe6-49cb-bf6d-db7260ea6f72",
-///                1481540557, 016683);
+///     let res = set_stime("/bricks/b1", "0a118af0-3c20-4bdd-aded-694a17af6b5a",
+///                         "af95963b-bbe6-49cb-bf6d-db7260ea6f72",
+///                         1481540557, 016683);
+///     match res {
+///         Ok(_) => println!("OK"),
+///         Err(e) => println!("Failed to set stime: {}", e)
+///     }
 /// }
 /// ```
 pub fn set_stime(path: &str, master_volume_id: &str, slave_volume_id: &str, sec: u32, msec: u32) -> Result<(), Error> {
